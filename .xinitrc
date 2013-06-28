@@ -1,5 +1,8 @@
 #!/bin/bash
 
+#xset +fp /usr/share/fonts/local
+#xset fp rehash
+
 #########################################
 #xset -b # disable bell
 #eval `/usr/bin/ssh-agent`
@@ -10,17 +13,19 @@
 #fi
 ##########################################################
 
-#make sure to put this in the file to append the changes
-
 xrdb -merge ~/.Xresources
+
+
 
 while true
 do
 	VOL=$(amixer get Master | tail -1 | sed 's/.*\[\([0-9]*%\)\].*/\1/')
+#	LOCALTIME=$(date +"%Y-%m-%d %H:%M")
 	TIME=$(date +"%a, %b %d %R")
+#	DATE=$(date +"%Y-%m-%d")
 	IP=$(for i in `ip r`; do echo $i; done | grep -A 1 src | tail -n1) # can get confused if you use vmware
 	TEMP="$(($(cat /sys/class/thermal/thermal_zone0/temp) / 1000))C"
-
+	BAT="$(acpi -b | awk '{ print $4 " " $5 }' | tr -d ',')"
 
 #	if acpi -a | grep off-line > /dev/null
 #	then
@@ -30,7 +35,7 @@ do
 #		xsetroot -name "$IP $VOL $TEMP $LOCALTIME"
 #	fi
 
-        xsetroot -name "IP:$IP  Vol:$VOL  $TEMP  $TIME"
+        xsetroot -name "IP:$IP  Vol:$VOL  $TEMP  Bat:$BAT $TIME"
 	sleep 20s
 done &
 
