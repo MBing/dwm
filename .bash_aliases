@@ -1,0 +1,11 @@
+#!/usr/bin/sh
+alias x="startx"
+alias droplink=".dropbox-dist/dropboxd"
+alias poweroff="sudo poweroff"
+alias spotify="wine ~/WinApps/SpotifySetup.exe"
+alias gitcom="git commit -m"
+alias gitpush="git push origin master"
+alias la="ls -a"
+alias ll="ls -lh"
+alias lla="ls -alh"
+alias bat="acpi -b"
